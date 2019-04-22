@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:showIn="navigation_view">
+
+    <item android:title="Utilities" >
+
+
+        <item
+            android:id="@+id/nav_account"
+            android:icon="@mipmap/ic_account"
+            android:title="Account" />
+        <item
+            android:id="@+id/nav_contact"
+            android:icon="@mipmap/ic_contact"
+            android:title="Contact" />
+        <item
+            android:id="@+id/nav_about"
+            android:icon="@mipmap/ic_about"
+            android:title="About US" />
+    </item>
+
+    <item android:title="Contact Us">
+        <menu>
+            <item
+                android:id="@+id/fb"
+                android:icon="@drawable/com_facebook_button_icon_blue"
+                android:title="Facebook" />
+            <item
+                android:id="@+id/wa"
+                android:icon="@drawable/whatsapp"
+                android:title="Whatsapp" />
+            <item
+                android:id="@+id/insta"
+                android:icon="@drawable/whatsapp"
+                android:title="Instagram" />
+        </menu>
+    </item>
+
+</menu>

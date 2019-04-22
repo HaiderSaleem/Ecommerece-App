@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.mhaidersaleem.bottom">
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/tuf"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/tuf"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+        android:name="android.support.multidex.MultiDexApplication">
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Product_desc"
+            android:label="TUF"
+            ></activity>
+        <activity android:name=".Checkout"></activity>
+        <activity android:name=".SignUp"></activity>
+        <activity android:name=".user_address"></activity>
+        <activity android:name=".user_account"></activity>
+    </application>
+
+</manifest>

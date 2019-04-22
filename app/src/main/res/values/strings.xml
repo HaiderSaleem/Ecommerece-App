@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">TUF</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Favourite</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="navigation_drawer_close">Close</string>
+    <string name="open_drawer">Open</string>
+</resources>

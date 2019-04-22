@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/slot1"
+        app:showAsAction="ifRoom|withText"
+        android:title="Movies"
+        android:visible="true"/>
+    <item
+        android:id="@+id/slot2"
+        app:showAsAction="ifRoom|withText"
+        android:title="Music"
+        android:visible="true"/>
+    <item
+        android:id="@+id/slot3"
+        app:showAsAction="ifRoom|withText"
+        android:title="Comedy"
+        android:visible="true"/>
+
+</menu>
