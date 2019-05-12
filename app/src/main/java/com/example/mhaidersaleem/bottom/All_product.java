@@ -12,6 +12,7 @@ import android.provider.FontsContract;
 import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.CardView;
 import android.text.InputType;
 import android.text.style.TextAppearanceSpan;
 import android.util.Log;
@@ -143,16 +144,20 @@ public class All_product extends Fragment {
                 sub_liner.setOrientation(LinearLayout.HORIZONTAL);
 
                 //Dynamically sub Layoutfor 2 pics at once
-                LinearLayout sub_1_liner = new LinearLayout(getContext());
-                LinearLayout.LayoutParams sub_1_params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-
+                CardView sub_1_liner = new CardView(getContext());
+                LinearLayout.LayoutParams sub_1_params = new LinearLayout.LayoutParams(width/2, LinearLayout.LayoutParams.WRAP_CONTENT);
+                sub_1_params.rightMargin=5;
+                sub_1_params.leftMargin=5;
                 sub_1_liner.setLayoutParams(sub_1_params);
-                sub_1_liner.setOrientation(LinearLayout.VERTICAL);
-                LinearLayout sub_2_liner = new LinearLayout(getContext());
-                LinearLayout.LayoutParams sub_2_params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
+                //sub_1_liner.setOrientation(LinearLayout.VERTICAL);
+                CardView sub_2_liner = new CardView(getContext());
+                LinearLayout.LayoutParams sub_2_params = new LinearLayout.LayoutParams(width/2, LinearLayout.LayoutParams.WRAP_CONTENT);
+                sub_2_params.leftMargin=5;
+                sub_2_params.rightMargin=5;
                 sub_2_liner.setLayoutParams(sub_2_params);
-                sub_2_liner.setOrientation(LinearLayout.VERTICAL);
+
+                //sub_2_liner.setOrientation(LinearLayout.VERTICAL);
 
 
                 //Dynamically image1
@@ -163,7 +168,7 @@ public class All_product extends Fragment {
 
                 //Price+Name TEXT1
                 TextView txt1= new TextView(getContext());
-                LinearLayout.LayoutParams txt_1_params = new LinearLayout.LayoutParams(width/2, height/16);
+                LinearLayout.LayoutParams txt_1_params = new LinearLayout.LayoutParams(width/2, height/15);
                 txt_1_params.leftMargin=40;
 
                 txt1.setLayoutParams(txt_1_params);
@@ -171,7 +176,7 @@ public class All_product extends Fragment {
                 TextView name1= new TextView(getContext());
                 LinearLayout.LayoutParams name_1_params = new LinearLayout.LayoutParams(width/2, height/18);
                 name_1_params.leftMargin=40;
-
+                name_1_params.topMargin=(height/4)-10;
                 name1.setLayoutParams(name_1_params);
 
 
@@ -186,14 +191,14 @@ public class All_product extends Fragment {
                 //Price+ NAME TEXT2
 
                 TextView txt2= new TextView(getContext());
-                LinearLayout.LayoutParams txt_2_params = new LinearLayout.LayoutParams(width/2, height/16);
+                LinearLayout.LayoutParams txt_2_params = new LinearLayout.LayoutParams(width/2, height/15);
                 txt_2_params.leftMargin=40;
                 txt2.setLayoutParams(txt_2_params);
 
                 final TextView name2= new TextView(getContext());
                 LinearLayout.LayoutParams name_2_params = new LinearLayout.LayoutParams(width/2, height/18);
                 name_2_params.leftMargin=40;
-
+                name_2_params.topMargin=(height/4)-10;
                 name2.setLayoutParams(name_2_params);
 
 
