@@ -5,6 +5,7 @@ package com.example.mhaidersaleem.bottom;
  */
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -168,8 +169,9 @@ public class All_product extends Fragment {
 
                 //Price+Name TEXT1
                 TextView txt1= new TextView(getContext());
+                txt1.setTextColor(Color.BLUE);
                 LinearLayout.LayoutParams txt_1_params = new LinearLayout.LayoutParams(width/2, height/15);
-                txt_1_params.leftMargin=40;
+                txt_1_params.leftMargin=20;
 
                 txt1.setLayoutParams(txt_1_params);
 
@@ -191,8 +193,9 @@ public class All_product extends Fragment {
                 //Price+ NAME TEXT2
 
                 TextView txt2= new TextView(getContext());
+                txt2.setTextColor(Color.BLUE);
                 LinearLayout.LayoutParams txt_2_params = new LinearLayout.LayoutParams(width/2, height/15);
-                txt_2_params.leftMargin=40;
+                txt_2_params.leftMargin=20;
                 txt2.setLayoutParams(txt_2_params);
 
                 final TextView name2= new TextView(getContext());
