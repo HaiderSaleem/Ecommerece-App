@@ -1,6 +1,6 @@
 # Ecommerece-App
 Attached ScreenShot of apps
-Everything is getting created dynamically so it can adjust better with respect to screen size of every smartphone.
+Everything is getting created dynamically(card view) so it can adjust better with respect to screen size of every smartphone.
 
 Many changes for betterment need to be made.
 
