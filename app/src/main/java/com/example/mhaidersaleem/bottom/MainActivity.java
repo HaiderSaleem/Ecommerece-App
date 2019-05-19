@@ -20,6 +20,7 @@ import android.support.v4.app.*;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -58,10 +59,15 @@ public class MainActivity  extends AppCompatActivity implements NavigationView.O
     private SearchView.OnQueryTextListener queryTextListener;
     ListView list;
     static List<String> names= new ArrayList<>();
+    static List<String> imgurl= new ArrayList<>();
+    static List<String> des= new ArrayList<>();
+    static List<String> key= new ArrayList<>();
+    static List<String> prices= new ArrayList<>();
+
     static  DatabaseReference rootRef;
     static com.google.firebase.database.DatabaseReference imagesRef;
     static int count=0;
-    ArrayAdapter mAdapter;
+    ArrayAdapter mAdapter=null;
 
 
     private int[] mTabsIcons = {
@@ -101,11 +107,16 @@ public class MainActivity  extends AppCompatActivity implements NavigationView.O
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
 
                         //Data_Images obj = ds.getValue(Data_Images.class);
-
+                        String price = ds.child("price").getValue().toString();
                         String name = ds.child("name").getValue().toString();
-
-
+                        String url = ds.child("path").getValue().toString();
+                        String desc = ds.child("description").getValue().toString();
+                        String keys = ds.child("key").getValue().toString();
+                        imgurl.add(url);
                         names.add(name);
+                        des.add(desc);
+                        key.add(keys);
+                        prices.add(price);
 
 
 
@@ -121,10 +132,17 @@ public class MainActivity  extends AppCompatActivity implements NavigationView.O
             }
         });
 
-
-       mAdapter = new ArrayAdapter<String>(MainActivity.this,
-                android.R.layout.simple_list_item_1,
-                names);
+        try {
+            if (mAdapter==null) {
+                mAdapter = new ArrayAdapter<>(MainActivity.this,
+                        android.R.layout.simple_list_item_1,
+                        names);
+            }
+        }
+        catch (Exception ex)
+        {
+            Log.d("Search",ex.getMessage());
+        }
         /*final ImageView s1 = findViewById(R.id.s1);
         s1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -370,7 +388,27 @@ public class MainActivity  extends AppCompatActivity implements NavigationView.O
                     list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                            Toast.makeText(MainActivity.this, adapterView.getItemAtPosition(i).toString(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, names.get(i), Toast.LENGTH_SHORT).show();
+                            Intent pro_des = new Intent(view.getContext(), Product_desc.class);
+                            pro_des.putExtra("path", imgurl.get(i));
+                            pro_des.putExtra("name", names.get(i));
+                            pro_des.putExtra("des", des.get(i));
+                            pro_des.putExtra("key", key.get(i));
+                            pro_des.putExtra("activity_name", "home");
+                            pro_des.putExtra("price", prices.get(i));
+                            pro_des.putExtra("page", 0);
+                            Log.d("count1", key.get(i));
+                            //FragmentTransaction ft = getFragmentManager().beginTransaction();
+                            //ft.detach(All_product.this).attach(All_product.this).commit();
+                            try
+                            {
+                            startActivity(pro_des);
+                        }
+                            catch (Exception ex)
+                            {
+                                Log.d("exce",ex.getMessage());
+                            }
+
                             list.setVisibility(View.GONE);
                             pro_layer.setVisibility(View.VISIBLE);
                         }
