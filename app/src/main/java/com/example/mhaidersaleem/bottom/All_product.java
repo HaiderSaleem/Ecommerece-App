@@ -17,12 +17,14 @@ import android.support.v7.widget.CardView;
 import android.text.InputType;
 import android.text.style.TextAppearanceSpan;
 import android.util.Log;
+import android.view.ContextThemeWrapper;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -146,14 +148,14 @@ public class All_product extends Fragment {
 
                 //Dynamically sub Layoutfor 2 pics at once
                 CardView sub_1_liner = new CardView(getContext());
-                LinearLayout.LayoutParams sub_1_params = new LinearLayout.LayoutParams(width/2, LinearLayout.LayoutParams.WRAP_CONTENT);
+                CardView.LayoutParams sub_1_params = new CardView.LayoutParams(width/2, LinearLayout.LayoutParams.WRAP_CONTENT);
                 sub_1_params.rightMargin=5;
                 sub_1_params.leftMargin=5;
                 sub_1_liner.setLayoutParams(sub_1_params);
 
                 //sub_1_liner.setOrientation(LinearLayout.VERTICAL);
                 CardView sub_2_liner = new CardView(getContext());
-                LinearLayout.LayoutParams sub_2_params = new LinearLayout.LayoutParams(width/2, LinearLayout.LayoutParams.WRAP_CONTENT);
+                CardView.LayoutParams sub_2_params = new CardView.LayoutParams (width/2, LinearLayout.LayoutParams.WRAP_CONTENT);
                 sub_2_params.leftMargin=5;
                 sub_2_params.rightMargin=5;
                 sub_2_liner.setLayoutParams(sub_2_params);
@@ -171,17 +173,34 @@ public class All_product extends Fragment {
                 //Price+Name TEXT1
                 TextView txt1= new TextView(getContext());
                 txt1.setTextColor(Color.BLUE);
+
                 LinearLayout.LayoutParams txt_1_params = new LinearLayout.LayoutParams(width/2, height/15);
                 txt_1_params.leftMargin=20;
 
                 txt1.setLayoutParams(txt_1_params);
 
                 TextView name1= new TextView(getContext());
-                LinearLayout.LayoutParams name_1_params = new LinearLayout.LayoutParams(width/2, height/18);
-                name_1_params.leftMargin=40;
-                name_1_params.topMargin=(height/4)-10;
+                LinearLayout.LayoutParams name_1_params = new LinearLayout.LayoutParams(width/4, height/23);
+                name_1_params.leftMargin=30;
+                name_1_params.topMargin=(height/4)+15;
                 name1.setLayoutParams(name_1_params);
 
+
+                //Rating bar 1
+
+                LinearLayout rate_lay = new LinearLayout(getContext());
+                LinearLayout.LayoutParams rate_pam = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);
+                rate_pam.leftMargin=(width/4)+25;
+                rate_pam.topMargin=(height/4)+15;
+                rate_lay.setLayoutParams(rate_pam);
+                RatingBar rat1= new RatingBar(new ContextThemeWrapper(getContext(), R.style.customRatingBar), null, 0);
+                rat1.setNumStars(5);
+                rat1.setRating(2);
+                LinearLayout.LayoutParams rate_1_params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+
+
+                rat1.setLayoutParams(rate_1_params);
+                rate_lay.addView(rat1);
 
 
                 //Dynamically image2
@@ -200,12 +219,28 @@ public class All_product extends Fragment {
                 txt2.setLayoutParams(txt_2_params);
 
                 final TextView name2= new TextView(getContext());
-                LinearLayout.LayoutParams name_2_params = new LinearLayout.LayoutParams(width/2, height/18);
-                name_2_params.leftMargin=40;
-                name_2_params.topMargin=(height/4)-10;
+                LinearLayout.LayoutParams name_2_params = new LinearLayout.LayoutParams(width/4, height/23);
+                name_2_params.leftMargin=30;
+                name_2_params.topMargin=(height/4)+15;
                 name2.setLayoutParams(name_2_params);
 
 
+
+                //Rating bar 2
+
+                LinearLayout rate_2_lay = new LinearLayout(getContext());
+                LinearLayout.LayoutParams rate_2_pam = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);
+                rate_2_pam.leftMargin=(width/4)+25;
+                rate_2_pam.topMargin=(height/4)+15;
+                rate_2_lay.setLayoutParams(rate_2_pam);
+
+                RatingBar rat2= new RatingBar(new ContextThemeWrapper(getContext(), R.style.customRatingBar), null, 0);
+                rat2.setNumStars(5);
+                rat2.setRating(4);
+                LinearLayout.LayoutParams rate_2_params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                rat2.setLayoutParams(rate_2_params);
+
+                rate_2_lay.addView(rat2);
                 //image1 view
 
                 final String buttonID = "imageView"+counter ;
@@ -250,6 +285,7 @@ public class All_product extends Fragment {
                 sub_1_liner.addView(img1);
                 sub_1_liner.addView(name1);
                 sub_1_liner.addView(txt1);
+                sub_1_liner.addView(rate_lay);
 
                 //image2 view
                 c++;
@@ -299,6 +335,7 @@ public class All_product extends Fragment {
                     sub_2_liner.addView(img2);
                     sub_2_liner.addView(name2);
                     sub_2_liner.addView(txt2);
+                    sub_2_liner.addView(rate_2_lay);
                     sub_liner.addView(sub_2_liner);
                 }
 
