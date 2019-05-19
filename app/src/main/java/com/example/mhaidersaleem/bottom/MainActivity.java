@@ -101,9 +101,11 @@ public class MainActivity  extends AppCompatActivity implements NavigationView.O
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()) {
                     count = (int) dataSnapshot.getChildrenCount();
+                    Log.d("count", "key des " + key.size());
+                    if(key.size()<count){
                     Log.d("count", "Count des " + count);
 
-                    Log.d("Modafkr", "Count des " + count);
+
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
 
                         //Data_Images obj = ds.getValue(Data_Images.class);
@@ -117,7 +119,7 @@ public class MainActivity  extends AppCompatActivity implements NavigationView.O
                         des.add(desc);
                         key.add(keys);
                         prices.add(price);
-
+                    }
 
 
                     }
@@ -388,16 +390,27 @@ public class MainActivity  extends AppCompatActivity implements NavigationView.O
                     list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                            Toast.makeText(MainActivity.this, names.get(i), Toast.LENGTH_SHORT).show();
+                            String name=adapterView.getItemAtPosition(i).toString();
+                            Toast.makeText(MainActivity.this, adapterView.getItemAtPosition(i).toString(), Toast.LENGTH_SHORT).show();
                             Intent pro_des = new Intent(view.getContext(), Product_desc.class);
-                            pro_des.putExtra("path", imgurl.get(i));
-                            pro_des.putExtra("name", names.get(i));
-                            pro_des.putExtra("des", des.get(i));
-                            pro_des.putExtra("key", key.get(i));
-                            pro_des.putExtra("activity_name", "home");
-                            pro_des.putExtra("price", prices.get(i));
-                            pro_des.putExtra("page", 0);
-                            Log.d("count1", key.get(i));
+                            int count =0;
+                            for(String namee: names)
+                            {
+                                if (name.equals(namee))
+                                {
+                                    pro_des.putExtra("path", imgurl.get(count));
+                                    pro_des.putExtra("name", names.get(count));
+                                    pro_des.putExtra("des", des.get(count));
+                                    pro_des.putExtra("key", key.get(count));
+                                    pro_des.putExtra("activity_name", "home");
+                                    pro_des.putExtra("price", prices.get(count));
+                                    pro_des.putExtra("page", 0);
+                                    Log.d("count1", key.get(count));
+                                }
+                                count++;
+                            }
+
+
                             //FragmentTransaction ft = getFragmentManager().beginTransaction();
                             //ft.detach(All_product.this).attach(All_product.this).commit();
                             try
