@@ -1,0 +1,99 @@
+{
+  "project_info": {
+    "project_number": "138859370973",
+    "firebase_url": "https://ecommerce-def85.firebaseio.com",
+    "project_id": "ecommerce-def85",
+    "storage_bucket": "ecommerce-def85.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:138859370973:android:ecf74be95f8fa8b9",
+        "android_client_info": {
+          "package_name": "com.example.mhaidersaleem.bottom"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "138859370973-d8sq348ds41h69g0ig7691ocbnut9cms.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.mhaidersaleem.bottom",
+            "certificate_hash": "62c2d066d51d0ad79463b029ace1156c0dcf0136"
+          }
+        },
+        {
+          "client_id": "138859370973-u4lu43b3aehmnp9ge3kbihc48af567gh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDE1ho1HPw_wxivxx49JkDNN4-Xz6A05Dg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "138859370973-u4lu43b3aehmnp9ge3kbihc48af567gh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:138859370973:android:abb97aac232dcb86",
+        "android_client_info": {
+          "package_name": "com.example.mhaidersaleem.screenslider"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "138859370973-ndjej4g24ffihur2ddc5r6sm9parljol.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.mhaidersaleem.screenslider",
+            "certificate_hash": "62c2d066d51d0ad79463b029ace1156c0dcf0136"
+          }
+        },
+        {
+          "client_id": "138859370973-u4lu43b3aehmnp9ge3kbihc48af567gh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDE1ho1HPw_wxivxx49JkDNN4-Xz6A05Dg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "138859370973-u4lu43b3aehmnp9ge3kbihc48af567gh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

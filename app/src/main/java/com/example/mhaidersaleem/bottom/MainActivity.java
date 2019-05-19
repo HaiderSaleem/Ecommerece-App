@@ -30,16 +30,38 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.support.v7.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class MainActivity  extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,SearchView.OnQueryTextListener {
     private TabLayout mTabLayout;
     android.support.v7.app.ActionBarDrawerToggle toggle;
     DrawerLayout drawer;
+    private SearchView searchView = null;
+    private SearchView.OnQueryTextListener queryTextListener;
+    ListView list;
+    static List<String> names= new ArrayList<>();
+    static  DatabaseReference rootRef;
+    static com.google.firebase.database.DatabaseReference imagesRef;
+    static int count=0;
+    ArrayAdapter mAdapter;
 
 
     private int[] mTabsIcons = {
@@ -47,6 +69,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             R.drawable.ic_favouries,
             R.drawable.ic_dashboard_black_24dp};
     LinearLayout pro;
+    LinearLayout pro_layer;
+    ProgressBar pro2;
     @Override
     protected void attachBaseContext(Context context) {
         super.attachBaseContext(context);
@@ -59,6 +83,59 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         int position = 0;
+        pro_layer = findViewById(R.id.pro_layer);
+
+        rootRef = FirebaseDatabase.getInstance().getReference();
+        imagesRef = rootRef.child("info");
+
+        imagesRef.addValueEventListener(new ValueEventListener() {
+
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()) {
+                    count = (int) dataSnapshot.getChildrenCount();
+                    Log.d("count", "Count des " + count);
+
+                    Log.d("Modafkr", "Count des " + count);
+                    for (DataSnapshot ds : dataSnapshot.getChildren()) {
+
+                        //Data_Images obj = ds.getValue(Data_Images.class);
+
+                        String name = ds.child("name").getValue().toString();
+
+
+                        names.add(name);
+
+
+
+                    }
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.d("db",databaseError.getMessage());
+            }
+        });
+
+
+       mAdapter = new ArrayAdapter<String>(MainActivity.this,
+                android.R.layout.simple_list_item_1,
+                names);
+        /*final ImageView s1 = findViewById(R.id.s1);
+        s1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                s1.setVisibility(View.GONE);
+                SearchView s = findViewById(R.id.searchView);
+                s.setVisibility(View.VISIBLE);
+
+            }
+        });*/
+
         Bundle extras = getIntent().getExtras();
         getWindow().setExitTransition(null);
         getWindow().setEnterTransition(null);
@@ -84,10 +161,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.addDrawerListener(toggle);
 
 
-        pro =(LinearLayout) findViewById(R.id.progressBar1);
+        pro = findViewById(R.id.progressBar1);
+        pro2 = findViewById(R.id.progressBar2);
         new Task().execute();
         // Setup the viewPager
-        ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager);
+        ViewPager viewPager =  findViewById(R.id.view_pager);
 
 
         MyPagerAdapter pagerAdapter = new MyPagerAdapter(getSupportFragmentManager());
@@ -124,21 +202,36 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
     }
+
+
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         toggle.syncState();
     }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        Toast.makeText(this, "Query Inserted", Toast.LENGTH_SHORT).show();
+        return true;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        return false;
+    }
+
     class Task extends AsyncTask<String, Integer, Boolean> {
         protected void onPreExecute() {
 
             pro.setVisibility(View.VISIBLE);
+            pro2.setVisibility(View.VISIBLE);
             super.onPreExecute();
         }
         @Override
         protected void onPostExecute(Boolean result) {
             pro.setVisibility(View.GONE);
-
+            pro2.setVisibility(View.GONE);
             super.onPostExecute(result);
         }
 
@@ -152,6 +245,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 publishProgress(progressStatus);
                 try {
                     Thread.sleep(1/2);
+
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -212,7 +306,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer =  findViewById(R.id.drawer_layout);
+
+       /* if (!searchView.isIconified()) {
+            Log.i("searchview","Working");
+            searchView.onActionViewCollapsed();
+            list.setVisibility(View.GONE);
+            pro_layer.setVisibility(View.VISIBLE);
+            super.onBackPressed();
+
+        }*/
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -226,9 +329,73 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main2, menu);
-        return true;
+        getMenuInflater().inflate(R.menu.menu_search, menu);
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        SearchManager searchManager = (SearchManager) this.getSystemService(Context.SEARCH_SERVICE);
+
+        if (searchItem != null) {
+            searchView = (SearchView) searchItem.getActionView();
+        }
+        if (searchView != null) {
+            searchView.setSearchableInfo(searchManager.getSearchableInfo(this.getComponentName()));
+
+            queryTextListener = new SearchView.OnQueryTextListener() {
+                @Override
+                public boolean onQueryTextChange(String newText) {
+                    Log.i("onQueryTextChange", newText);
+                    list = findViewById(R.id.list);
+                    if(!searchView.isIconified())
+                    {
+                        Log.i("searchview","DWorking");
+                        if(newText.length()>0) {
+                            list.setVisibility(View.VISIBLE);
+                            pro_layer.setVisibility(View.GONE);
+                        }
+                        else
+                        {
+                            list.setVisibility(View.GONE);
+                            pro_layer.setVisibility(View.VISIBLE);
+                            Log.i("searchview","DDone");
+                        }
+                    }
+                    else if(searchView.isIconified() )
+                    {
+                        list.setVisibility(View.GONE);
+                        pro_layer.setVisibility(View.VISIBLE);
+                        Log.i("searchview","Done");
+                    }
+                    mAdapter.getFilter().filter(newText);
+                    list.setAdapter(mAdapter);
+
+                    list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                            Toast.makeText(MainActivity.this, adapterView.getItemAtPosition(i).toString(), Toast.LENGTH_SHORT).show();
+                            list.setVisibility(View.GONE);
+                            pro_layer.setVisibility(View.VISIBLE);
+                        }
+                    });
+
+
+
+                    return true;
+                }
+                @Override
+                public boolean onQueryTextSubmit(String query) {
+                    Log.i("onQueryTextSubmit", query);
+                    list.setVisibility(View.GONE);
+                    pro_layer.setVisibility(View.VISIBLE);
+
+                    return true;
+                }
+
+
+            };
+            searchView.setOnQueryTextListener(queryTextListener);
+        }
+        return super.onCreateOptionsMenu(menu);
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -306,4 +473,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
     }

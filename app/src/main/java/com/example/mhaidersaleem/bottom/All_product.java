@@ -165,6 +165,7 @@ public class All_product extends Fragment {
                 ImageView img1= new ImageView(getContext());
 
                 LinearLayout.LayoutParams img_1_params = new LinearLayout.LayoutParams(width/2, height/4);
+                img_1_params.setMargins(5,5,5,5);
                 img1.setLayoutParams(img_1_params);
 
                 //Price+Name TEXT1
@@ -187,7 +188,7 @@ public class All_product extends Fragment {
                 ImageView img2= new ImageView(getContext());
 
                 LinearLayout.LayoutParams img_2_params = new LinearLayout.LayoutParams(width/2, height/4);
-
+                img_2_params.setMargins(5,5,5,5);
                 img2.setLayoutParams(img_2_params);
 
                 //Price+ NAME TEXT2

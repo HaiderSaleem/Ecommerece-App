@@ -20,42 +20,47 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/pro_layer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_marginTop="50dp">
-    <LinearLayout
-        android:id="@+id/progressBar1"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:layout_marginTop="50dp"
+        android:orientation="vertical">
 
-        <ProgressBar
-            android:id="@+id/progressBar2"
-            style="?android:attr/progressBarStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="250dp"
+        <LinearLayout
+            android:id="@+id/progressBar1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:visibility="visible">
+
+            <ProgressBar
+                android:id="@+id/progressBar2"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="250dp"
+                android:layout_weight="1"
+                android:visibility="visible" />
+        </LinearLayout>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="50dp"
             android:layout_weight="1" />
-    </LinearLayout>
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/view_pager"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_marginTop="50dp"/>
-
-    <android.support.design.widget.TabLayout
-        android:id="@+id/tab_layout"
-        style="@style/Widget.Design.TabLayout"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:background="?attr/colorButtonNormal"
-        app:tabIndicatorColor="@android:color/background_dark"
-        app:tabMode="fixed" />
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tab_layout"
+            style="@style/Widget.Design.TabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="?attr/colorButtonNormal"
+            app:tabIndicatorColor="@android:color/background_dark"
+            app:tabMode="fixed" />
 
     </LinearLayout>
+
 
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"
@@ -64,7 +69,16 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         android:visibility="visible"
-        app:menu="@menu/activity_main2_drawer" />
+        app:menu="@menu/activity_main2_drawer" >
+
+        <ImageView
+            android:id="@+id/imageView11"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/todo"
+            tools:srcCompat="@drawable/com_facebook_profile_picture_blank_portrait" />
+    </android.support.design.widget.NavigationView>
+
 
 
 </android.support.v4.widget.DrawerLayout>
