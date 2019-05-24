@@ -12,8 +12,11 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.Display;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -67,34 +70,88 @@ public class Product_desc extends Activity {
         String favouriteID = "favourite";
         int favouritesID = getResources().getIdentifier(favouriteID, "id", "com.example.mhaidersaleem.bottom");
         favourite.setId(favouritesID);
-        LinearLayout.LayoutParams fv = new LinearLayout.LayoutParams(width/6,height/20);
-        favourite.setBackground(Drawable.createFromPath("ic_favourite"));
+        LinearLayout.LayoutParams fv = new LinearLayout.LayoutParams(width/8,height/15);
+        favourite.setBackgroundResource(R.drawable.ic_favourite);
         favourite.setLayoutParams(fv);
         //end here
 
         //Product Image
 
 
-        LinearLayout prodyuct_layer = new LinearLayout(getApplicationContext());
-        LinearLayout.LayoutParams pro_pam = new LinearLayout.LayoutParams(width,height/5);
-        prodyuct_layer.setLayoutParams(pro_pam);
+        LinearLayout product_layer = new LinearLayout(getApplicationContext());
+        LinearLayout.LayoutParams pro_pam = new LinearLayout.LayoutParams(width,height/2);
+        product_layer.setLayoutParams(pro_pam);
 
         ImageView pro_image = new ImageView(getApplicationContext());
         String imageID = "product_image";
         int imagerID = getResources().getIdentifier(imageID, "id", "com.example.mhaidersaleem.bottom");
         pro_image.setId(imagerID);
 
-        LinearLayout.LayoutParams image_pam = new LinearLayout.LayoutParams(width-20,height/6);
-        image_pam.setMargins(10,2,10,0);
+        LinearLayout.LayoutParams image_pam = new LinearLayout.LayoutParams(width-4,height/2);
+        image_pam.setMargins(2,0,2,0);
         pro_image.setLayoutParams(image_pam);
 
+        product_layer.addView(pro_image);
+        //end here
+
+        //More Images
+
+        HorizontalScrollView hor = new HorizontalScrollView(getApplicationContext());
+        HorizontalScrollView.LayoutParams  hor_param= new HorizontalScrollView.LayoutParams(HorizontalScrollView.LayoutParams.MATCH_PARENT,height/10);
+        hor.setLayoutParams(hor_param);
+        LinearLayout product1_layer = new LinearLayout(getApplicationContext());
+        product1_layer.setOrientation(LinearLayout.HORIZONTAL);
+        LinearLayout.LayoutParams pro1_pam = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,height/10);
+        product1_layer.setLayoutParams(pro1_pam);
+
+        ImageView pro1_image = new ImageView(getApplicationContext());
+        String image_subID1= "img1";
+        pro1_image.setBackgroundResource(R.drawable.com_facebook_profile_picture_blank_square);
+        int images_subID1 = getResources().getIdentifier(image_subID1, "id", "com.example.mhaidersaleem.bottom");
+        pro1_image.setId(images_subID1);
+
+        LinearLayout.LayoutParams image_pam1 = new LinearLayout.LayoutParams(width/4,height/10);
+        //image_pam.setMargins(10,2,10,0);
+        pro1_image.setLayoutParams(image_pam1);
+
+        ImageView pro2_image = new ImageView(getApplicationContext());
+        String image_subID2= "img2";
+        int images_subID2 = getResources().getIdentifier(image_subID2, "id", "com.example.mhaidersaleem.bottom");
+        Log.d("ExImages",String.valueOf(images_subID1));
+        pro2_image.setId(images_subID2);
+        pro2_image.setBackgroundResource(R.drawable.com_facebook_profile_picture_blank_square);
+        LinearLayout.LayoutParams image_pam2 = new LinearLayout.LayoutParams(width/4,height/10);
+        //image_pam2.setMargins(10,2,10,0);
+        pro2_image.setLayoutParams(image_pam2);
+        product1_layer.addView(pro1_image);
+        product1_layer.addView(pro2_image);
+        hor.addView(product1_layer);
+        //end here
+
+        // TextView
+
+        LinearLayout t_l = new LinearLayout(getApplicationContext());
+        LinearLayout.LayoutParams t_LL = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, height/10);
+        t_l.setLayoutParams(t_LL);
+
+        TextView pro_name = new TextView(getApplicationContext());
+        pro_name.setTextSize(50);
+        pro_name.setTextAppearance(R.style.TextAppearance_AppCompat_Body2);
+        pro_name.setGravity(Gravity.CENTER);
+        LinearLayout.LayoutParams pro_L = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,height/10);
+        pro_name.setLayoutParams(pro_L);
+
+        t_l.addView(pro_name);
 
         //end here
         desc_pro.addView(favourite);
-        desc_pro.addView(pro_image);
+        desc_pro.addView(product_layer);
+        desc_pro.addView(hor);
+        desc_pro.addView(t_l);
+
 
         //img = findViewById(R.id.product_image);
-        final TextView name= findViewById(R.id.pro_name);
+        //final TextView name= findViewById(R.id.pro_name);
         TextView desc= findViewById(R.id.textView5);
 
         Intent rcv= getIntent();
@@ -107,7 +164,7 @@ public class Product_desc extends Activity {
          price= rcv.getStringExtra("price");
          page_no= rcv.getIntExtra("page",0);
 
-       name.setText(pname);
+       pro_name.setText(pname);
        desc.setText(description);
        imgurl.add(path);
 
@@ -271,16 +328,17 @@ public class Product_desc extends Activity {
 
             while (c < count) {
 
-                final String buttonID = "img" + counter;
+                final String ImgID = "img" + counter;
 
-                int resID = getResources().getIdentifier(buttonID, "id", "com.example.mhaidersaleem.bottom");
+                int resID = getResources().getIdentifier(ImgID, "id", "com.example.mhaidersaleem.bottom");
+                Log.d("ExImage",String.valueOf(resID));
                 final ImageView im = findViewById(resID);
-                final String spath = imgurl.get(c).toString();
+                final String spath = imgurl.get(c);
                 Glide.with(Product_desc.this)
                         .load(spath)
                         .into(im);
                 im.setScaleType(ImageView.ScaleType.FIT_XY);
-                Log.d("pro count1",imgurl.get(c).toString());
+                Log.d("pro count1",imgurl.get(c));
                 im.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -300,6 +358,7 @@ public class Product_desc extends Activity {
             }
 
         } catch (Exception ex) {
+            Log.d("ExImage",ex.getMessage());
 
         }
 
