@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -63,9 +64,9 @@ public class Product_desc extends Activity {
 
         //Favourite Button
         final Button favourite = new Button(getApplicationContext());
-        String imageID = "favourite";
-        int imagerID = getResources().getIdentifier(imageID, "id", "com.example.mhaidersaleem.bottom");
-        favourite.setId(imagerID);
+        String favouriteID = "favourite";
+        int favouritesID = getResources().getIdentifier(favouriteID, "id", "com.example.mhaidersaleem.bottom");
+        favourite.setId(favouritesID);
         LinearLayout.LayoutParams fv = new LinearLayout.LayoutParams(width/6,height/20);
         favourite.setBackground(Drawable.createFromPath("ic_favourite"));
         favourite.setLayoutParams(fv);
@@ -73,10 +74,26 @@ public class Product_desc extends Activity {
 
         //Product Image
 
-        
-        desc_pro.addView(favourite);
 
-        img = findViewById(R.id.product_image);
+        LinearLayout prodyuct_layer = new LinearLayout(getApplicationContext());
+        LinearLayout.LayoutParams pro_pam = new LinearLayout.LayoutParams(width,height/5);
+        prodyuct_layer.setLayoutParams(pro_pam);
+
+        ImageView pro_image = new ImageView(getApplicationContext());
+        String imageID = "product_image";
+        int imagerID = getResources().getIdentifier(imageID, "id", "com.example.mhaidersaleem.bottom");
+        pro_image.setId(imagerID);
+
+        LinearLayout.LayoutParams image_pam = new LinearLayout.LayoutParams(width-20,height/6);
+        image_pam.setMargins(10,2,10,0);
+        pro_image.setLayoutParams(image_pam);
+
+
+        //end here
+        desc_pro.addView(favourite);
+        desc_pro.addView(pro_image);
+
+        //img = findViewById(R.id.product_image);
         final TextView name= findViewById(R.id.pro_name);
         TextView desc= findViewById(R.id.textView5);
 
@@ -96,7 +113,7 @@ public class Product_desc extends Activity {
 
         Glide.with(Product_desc.this)
                 .load(path)
-                .into(img);
+                .into(pro_image);
         if(key!="0")
             getRef(key);
 
