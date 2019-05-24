@@ -3,14 +3,18 @@ package com.example.mhaidersaleem.bottom;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Point;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
+import android.view.Display;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +25,7 @@ import com.bumptech.glide.Glide;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.core.Context;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -45,6 +50,32 @@ public class Product_desc extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         setContentView(R.layout.product_desc);
         super.onCreate(savedInstanceState);
+        LinearLayout desc_pro = findViewById(R.id.desc_pro);
+        //screen size
+
+        Display display = this.getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        int width = size.x;
+        int height = size.y;
+
+        //end here
+
+        //Favourite Button
+        final Button favourite = new Button(getApplicationContext());
+        String imageID = "favourite";
+        int imagerID = getResources().getIdentifier(imageID, "id", "com.example.mhaidersaleem.bottom");
+        favourite.setId(imagerID);
+        LinearLayout.LayoutParams fv = new LinearLayout.LayoutParams(width/6,height/20);
+        favourite.setBackground(Drawable.createFromPath("ic_favourite"));
+        favourite.setLayoutParams(fv);
+        //end here
+
+        //Product Image
+
+        
+        desc_pro.addView(favourite);
+
         img = findViewById(R.id.product_image);
         final TextView name= findViewById(R.id.pro_name);
         TextView desc= findViewById(R.id.textView5);
@@ -69,7 +100,7 @@ public class Product_desc extends Activity {
         if(key!="0")
             getRef(key);
 
-         final Button favourite= findViewById(R.id.favourite);
+         //final Button favourite= findViewById(R.id.favourite);
 
 
         final DatabaseHandler obj= new DatabaseHandler(getApplicationContext());
