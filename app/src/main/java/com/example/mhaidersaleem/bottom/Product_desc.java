@@ -43,6 +43,8 @@ import java.util.List;
 public class Product_desc extends Activity {
     ImageView img;
     int count1=0;
+    int counter;
+    ArrayList<Integer> sub_im= new ArrayList<>();
 
     static List<String> imgurl = new ArrayList<>();
     static int count=0;
@@ -50,6 +52,9 @@ public class Product_desc extends Activity {
     String check_intent;
     String price;
     int page_no=0;
+    ImageView pro_image1;
+    ImageView pro_image2;
+    ImageView pro_image;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         setContentView(R.layout.product_desc);
@@ -82,7 +87,7 @@ public class Product_desc extends Activity {
         LinearLayout.LayoutParams pro_pam = new LinearLayout.LayoutParams(width,height/2);
         product_layer.setLayoutParams(pro_pam);
 
-        ImageView pro_image = new ImageView(getApplicationContext());
+        pro_image = new ImageView(getApplicationContext());
         String imageID = "product_image";
         int imagerID = getResources().getIdentifier(imageID, "id", "com.example.mhaidersaleem.bottom");
         pro_image.setId(imagerID);
@@ -104,27 +109,31 @@ public class Product_desc extends Activity {
         LinearLayout.LayoutParams pro1_pam = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,height/10);
         product1_layer.setLayoutParams(pro1_pam);
 
-        ImageView pro1_image = new ImageView(getApplicationContext());
-        String image_subID1= "img1";
-        pro1_image.setBackgroundResource(R.drawable.com_facebook_profile_picture_blank_square);
-        int images_subID1 = getResources().getIdentifier(image_subID1, "id", "com.example.mhaidersaleem.bottom");
-        pro1_image.setId(images_subID1);
+        pro_image1 = new ImageView(getApplicationContext());
+        //String image_subID1= "img1";
+        int id = View.generateViewId();
+        sub_im.add(id);
+        pro_image1.setBackgroundResource(R.drawable.com_facebook_profile_picture_blank_square);
+        //int images_subID1 = getResources().getIdentifier(image_subID1, "id", "com.example.mhaidersaleem.bottom");
+        pro_image1.setId(id);
 
         LinearLayout.LayoutParams image_pam1 = new LinearLayout.LayoutParams(width/4,height/10);
         //image_pam.setMargins(10,2,10,0);
-        pro1_image.setLayoutParams(image_pam1);
+        pro_image1.setLayoutParams(image_pam1);
 
-        ImageView pro2_image = new ImageView(getApplicationContext());
-        String image_subID2= "img2";
-        int images_subID2 = getResources().getIdentifier(image_subID2, "id", "com.example.mhaidersaleem.bottom");
-        Log.d("ExImages",String.valueOf(images_subID1));
-        pro2_image.setId(images_subID2);
-        pro2_image.setBackgroundResource(R.drawable.com_facebook_profile_picture_blank_square);
+        pro_image2 = new ImageView(getApplicationContext());
+        //String image_subID2= "img2";
+        id = View.generateViewId();
+        sub_im.add(id);
+        //int images_subID2 = getResources().getIdentifier(image_subID2, "id", "com.example.mhaidersaleem.bottom");
+        //Log.d("ExImages",String.valueOf(images_subID1));
+        pro_image2.setId(id);
+        pro_image2.setBackgroundResource(R.drawable.com_facebook_profile_picture_blank_square);
         LinearLayout.LayoutParams image_pam2 = new LinearLayout.LayoutParams(width/4,height/10);
         //image_pam2.setMargins(10,2,10,0);
-        pro2_image.setLayoutParams(image_pam2);
-        product1_layer.addView(pro1_image);
-        product1_layer.addView(pro2_image);
+        pro_image2.setLayoutParams(image_pam2);
+        product1_layer.addView(pro_image1);
+        product1_layer.addView(pro_image2);
         hor.addView(product1_layer);
         //end here
 
@@ -322,30 +331,33 @@ public class Product_desc extends Activity {
     public void set_images() {
         try {
 
-            int counter = 1;
+            counter = 1;
             int c = 0;
             count=2;
 
             while (c < count) {
 
-                final String ImgID = "img" + counter;
+                //final String ImgID = "img1";
 
-                int resID = getResources().getIdentifier(ImgID, "id", "com.example.mhaidersaleem.bottom");
+
+                //int resID = getResources().getIdentifier(ImgID, "id", "com.example.mhaidersaleem.bottom");
+                int resID = sub_im.get(c);
                 Log.d("ExImage",String.valueOf(resID));
                 final ImageView im = findViewById(resID);
                 final String spath = imgurl.get(c);
                 Glide.with(Product_desc.this)
                         .load(spath)
                         .into(im);
+
                 im.setScaleType(ImageView.ScaleType.FIT_XY);
                 Log.d("pro count1",imgurl.get(c));
                 im.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        //Toast.makeText(getActivity(),buttonID +"id: "+ index,Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(Product_desc.this,ImgID +"id:",Toast.LENGTH_SHORT).show();
                         Glide.with(Product_desc.this)
                                 .load(spath)
-                                .into(img);
+                                .into(pro_image);
 
 
                     }
