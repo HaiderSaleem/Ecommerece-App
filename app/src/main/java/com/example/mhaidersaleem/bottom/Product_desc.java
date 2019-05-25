@@ -3,6 +3,7 @@ package com.example.mhaidersaleem.bottom;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import android.media.Image;
@@ -71,6 +72,10 @@ public class Product_desc extends Activity {
         //end here
 
         //Favourite Button
+        LinearLayout Favourite_layer = new LinearLayout(getApplicationContext());
+        LinearLayout.LayoutParams Favourite_pam = new LinearLayout.LayoutParams(width,height/15);
+        Favourite_layer.setLayoutParams(Favourite_pam);
+        Favourite_layer.setBackgroundColor(Color.WHITE);
         final Button favourite = new Button(getApplicationContext());
         String favouriteID = "favourite";
         int favouritesID = getResources().getIdentifier(favouriteID, "id", "com.example.mhaidersaleem.bottom");
@@ -78,6 +83,8 @@ public class Product_desc extends Activity {
         LinearLayout.LayoutParams fv = new LinearLayout.LayoutParams(width/8,height/15);
         favourite.setBackgroundResource(R.drawable.ic_favourite);
         favourite.setLayoutParams(fv);
+
+        Favourite_layer.addView(favourite);
         //end here
 
         //Product Image
@@ -88,6 +95,7 @@ public class Product_desc extends Activity {
         product_layer.setLayoutParams(pro_pam);
 
         pro_image = new ImageView(getApplicationContext());
+        pro_image.setScaleType(ImageView.ScaleType.FIT_XY);
         String imageID = "product_image";
         int imagerID = getResources().getIdentifier(imageID, "id", "com.example.mhaidersaleem.bottom");
         pro_image.setId(imagerID);
@@ -113,7 +121,7 @@ public class Product_desc extends Activity {
         //String image_subID1= "img1";
         int id = View.generateViewId();
         sub_im.add(id);
-        pro_image1.setBackgroundResource(R.drawable.com_facebook_profile_picture_blank_square);
+        //pro_image1.setBackgroundResource(R.drawable.com_facebook_profile_picture_blank_square);
         //int images_subID1 = getResources().getIdentifier(image_subID1, "id", "com.example.mhaidersaleem.bottom");
         pro_image1.setId(id);
 
@@ -128,7 +136,7 @@ public class Product_desc extends Activity {
         //int images_subID2 = getResources().getIdentifier(image_subID2, "id", "com.example.mhaidersaleem.bottom");
         //Log.d("ExImages",String.valueOf(images_subID1));
         pro_image2.setId(id);
-        pro_image2.setBackgroundResource(R.drawable.com_facebook_profile_picture_blank_square);
+        //pro_image2.setBackgroundResource(R.drawable.com_facebook_profile_picture_blank_square);
         LinearLayout.LayoutParams image_pam2 = new LinearLayout.LayoutParams(width/4,height/10);
         //image_pam2.setMargins(10,2,10,0);
         pro_image2.setLayoutParams(image_pam2);
@@ -153,15 +161,40 @@ public class Product_desc extends Activity {
         t_l.addView(pro_name);
 
         //end here
-        desc_pro.addView(favourite);
+
+        //TextView of description
+
+        TextView pro_des= new TextView(getApplicationContext());
+        pro_name.setTextSize(50);
+        pro_name.setTextAppearance(R.style.TextAppearance_AppCompat_Body2);
+        LinearLayout.LayoutParams pro_desL = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,height/8);
+        pro_des.setLayoutParams(pro_desL);
+
+        //end here
+
+        //Add to Cart Button
+
+        Button add_cart = new Button(getApplicationContext());
+        id = View.generateViewId();
+        add_cart.setId(id);
+        add_cart.setBackgroundResource(R.drawable.com_facebook_button_background);
+        add_cart.setText("Add");
+        add_cart.setTextSize(20);
+        add_cart.setTextAppearance(R.style.TextAppearance_AppCompat_Body2);
+        LinearLayout.LayoutParams cart = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,height/15);
+        add_cart.setLayoutParams(cart);
+        //end here
+        desc_pro.addView(Favourite_layer);
         desc_pro.addView(product_layer);
         desc_pro.addView(hor);
         desc_pro.addView(t_l);
+        desc_pro.addView(pro_des);
+        desc_pro.addView(add_cart);
 
 
         //img = findViewById(R.id.product_image);
         //final TextView name= findViewById(R.id.pro_name);
-        TextView desc= findViewById(R.id.textView5);
+        //TextView desc= findViewById(R.id.textView5);
 
         Intent rcv= getIntent();
 
@@ -174,7 +207,7 @@ public class Product_desc extends Activity {
          page_no= rcv.getIntExtra("page",0);
 
        pro_name.setText(pname);
-       desc.setText(description);
+       pro_des.setText(description);
        imgurl.add(path);
 
         Glide.with(Product_desc.this)
@@ -245,8 +278,8 @@ public class Product_desc extends Activity {
 
         //add_to_cart
 
-        final Button cart = findViewById(R.id.add_cart);
-        cart.setOnClickListener(new View.OnClickListener() {
+        //final Button cart = findViewById(R.id.add_cart);
+        add_cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 SharedPreferences prefs = getSharedPreferences("Userdata", MODE_PRIVATE);
