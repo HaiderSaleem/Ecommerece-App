@@ -96,7 +96,7 @@ public class Product_Cart extends Fragment {
                 progressStatus++;
                 publishProgress(progressStatus);
                 try {
-                    Thread.sleep(1);
+                    Thread.sleep(1/2);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
