@@ -162,6 +162,7 @@ public class Product_Cart extends Fragment {
                 parent.setOrientation(LinearLayout.HORIZONTAL);
 
                 ImageView imgView = new ImageView(getContext());
+                imgView.setScaleType(ImageView.ScaleType.FIT_XY);
                 Button btn =  new Button(getContext());
                 TextView name = new TextView(getContext());
                 final TextView price = new TextView(getContext());
