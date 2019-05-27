@@ -97,6 +97,7 @@ public class PageFragment extends Fragment {
                 parent.setOrientation(LinearLayout.HORIZONTAL);
 
                 ImageView imgView = new ImageView(getContext());
+                imgView.setScaleType(ImageView.ScaleType.FIT_XY);
                 Button btn =  new Button(getContext());
                 TextView name = new TextView(getContext());
 
@@ -125,13 +126,14 @@ public class PageFragment extends Fragment {
                 int buttonrID = getResources().getIdentifier(buttonID, "id", "com.example.mhaidersaleem.bottom");
 
                 imgView.setId(imagerID);
+
                 name.setId(namerID);
                 btn.setId(buttonrID);
 
                 btn.setText("Buy Now");
                 name.setTextSize(20);
                 name.setTextAppearance(R.style.TextAppearance_AppCompat_Body2);
-                name.setText(obj1.get_name().toString());
+                name.setText(obj1.get_name());
 
 
 
