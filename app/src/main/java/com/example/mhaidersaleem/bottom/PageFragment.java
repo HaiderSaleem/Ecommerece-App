@@ -172,6 +172,25 @@ public class PageFragment extends Fragment {
 
                     }
                 });
+
+                btn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent pro_des= new Intent(v.getContext(),Product_desc.class);
+                        pro_des.putExtra("path",spath);
+                        pro_des.putExtra("name",obj1.get_name());
+                        pro_des.putExtra("des",obj1.get_des());
+                        pro_des.putExtra("key",obj1.get_key());
+                        pro_des.putExtra("activity_name","favourite");
+                        pro_des.putExtra("price",obj1.get_price());
+                        pro_des.putExtra("page",1);
+                        //Log.d("count1",keyss);
+                        FragmentTransaction ft = getFragmentManager().beginTransaction();
+                        ft.detach(PageFragment.this).attach(PageFragment.this).commit();
+
+                        startActivity(pro_des);
+                    }
+                });
             }
 
         }
