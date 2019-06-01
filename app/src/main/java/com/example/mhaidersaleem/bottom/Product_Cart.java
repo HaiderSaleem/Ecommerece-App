@@ -209,9 +209,9 @@ public class Product_Cart extends Fragment {
 
 
 
-                int imagerID = getResources().getIdentifier(imageID, "id", "com.example.mhaidersaleem.bottom");
-                int namerID = getResources().getIdentifier(nameID, "id", "com.example.mhaidersaleem.bottom");
-                int buttonrID = getResources().getIdentifier(buttonID, "id", "com.example.mhaidersaleem.bottom");
+                int imagerID =  View.generateViewId();  //getResources().getIdentifier(imageID, "id", "com.example.mhaidersaleem.bottom");
+                int namerID =  View.generateViewId(); //getResources().getIdentifier(nameID, "id", "com.example.mhaidersaleem.bottom");
+                int buttonrID =  View.generateViewId(); //getResources().getIdentifier(buttonID, "id", "com.example.mhaidersaleem.bottom");
                 int QrID = getResources().getIdentifier(QID, "id", "com.example.mhaidersaleem.bottom");
                 int PrID = getResources().getIdentifier(PID, "id", "com.example.mhaidersaleem.bottom");
                 //end here
