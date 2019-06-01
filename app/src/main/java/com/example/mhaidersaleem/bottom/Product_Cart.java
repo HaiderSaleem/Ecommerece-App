@@ -212,8 +212,8 @@ public class Product_Cart extends Fragment {
                 int imagerID =  View.generateViewId();  //getResources().getIdentifier(imageID, "id", "com.example.mhaidersaleem.bottom");
                 int namerID =  View.generateViewId(); //getResources().getIdentifier(nameID, "id", "com.example.mhaidersaleem.bottom");
                 int buttonrID =  View.generateViewId(); //getResources().getIdentifier(buttonID, "id", "com.example.mhaidersaleem.bottom");
-                int QrID = getResources().getIdentifier(QID, "id", "com.example.mhaidersaleem.bottom");
-                int PrID = getResources().getIdentifier(PID, "id", "com.example.mhaidersaleem.bottom");
+                int QrID =  View.generateViewId(); //getResources().getIdentifier(QID, "id", "com.example.mhaidersaleem.bottom");
+                int PrID = View.generateViewId(); //getResources().getIdentifier(PID, "id", "com.example.mhaidersaleem.bottom");
                 //end here
 
                 //assigning id to dynamically created attributes
