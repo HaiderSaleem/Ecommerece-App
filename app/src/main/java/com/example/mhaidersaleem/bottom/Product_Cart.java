@@ -201,8 +201,8 @@ public class Product_Cart extends Fragment {
 
 
                 //creating ids
-                final String imageID = "image" + counter;
-                final String buttonID = "button" + counter;
+                //final String imageID = "image" + counter;
+                //final String buttonID = "button" + counter;
                 final String nameID = "name" + counter;
                 final String QID = "quantity" + counter;
                 final String PID= "price"+ counter;
